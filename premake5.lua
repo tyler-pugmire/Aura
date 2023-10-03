@@ -1,31 +1,35 @@
 workspace "AuraEngine"
-architecture "x64"
-targetdir "build"
-
-configurations
 {
-    "Debug",
-    "Release"
-}
+    architecture "x64"
+    targetdir "build"
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+    configurations
+    {
+        "Debug",
+        "Release"
+    }
 
-project "Aura"
-location "Aura"
-kind "ConsoleApp"
-cppdialect "C++20"
+    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-targetdir("bin/" .. outputdir .. "/%{prj.name}")
+    project "Aura"
+    {
+        location "Aura"
+        kind "ConsoleApp"
+        cppdialect "C++20"
 
-objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+        targetdir("bin/" .. outputdir .. "/%{prj.name}")
 
-files
-{
-    "%{prj.name}/src/**.h",
-    "%{prj.name}/src/**.cpp",
-}
+        objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 
-includedirs
-{
-    "%{prj.name}/src"
+        files
+        {
+            "%{prj.name}/src/**.h",
+            "%{prj.name}/src/**.cpp"
+        }
+
+        includedirs
+        {
+            "%{prj.name}/src"
+        }
+    }
 }
