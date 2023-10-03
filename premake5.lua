@@ -1,35 +1,68 @@
 workspace "AuraEngine"
+architecture "x64"
+targetdir "build"
+startproject "sandbox"
+
+
+configurations
 {
-    architecture "x64"
-    targetdir "build"
+    "Debug",
+    "Release"
+}
 
-    configurations
-    {
-        "Debug",
-        "Release"
-    }
+flags
+{
+    "MultiProcessorCompile"
+}
 
-    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+local outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-    project "Aura"
-    {
-        location "Aura"
-        kind "ConsoleApp"
-        cppdialect "C++20"
+group ""
+project "sandbox"
+location "sandbox"
+kind "ConsoleApp"
+language "C++"
+cppdialect "C++20"
 
-        targetdir("bin/" .. outputdir .. "/%{prj.name}")
+targetdir("bin/" .. outputdir .. "/%{prj.name}")
+objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 
-        objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+links
+{
+    "Aura"
+}
 
-        files
-        {
-            "%{prj.name}/src/**.h",
-            "%{prj.name}/src/**.cpp"
-        }
+files
+{
+    "%{prj.name}/src/**.h",
+    "%{prj.name}/src/**.c",
+    "%{prj.name}/src/**.hpp",
+    "%{prj.name}/src/**.cpp"
+}
 
-        includedirs
-        {
-            "%{prj.name}/src"
-        }
-    }
+includedirs
+{
+    "%{prj.name}/src",
+    "Aura/src",
+}
+
+
+group "Engine"
+project "Aura"
+location "Aura"
+kind "StaticLib"
+cppdialect "C++20"
+
+targetdir("bin/" .. outputdir .. "/%{prj.name}")
+objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+
+files
+{
+    "%{prj.name}/src/**.h",
+    "%{prj.name}/src/**.cpp"
+}
+
+includedirs
+{
+    "%{prj.name}/src"
 }
