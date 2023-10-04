@@ -1,3 +1,5 @@
+require "export-compile-commands"
+
 workspace "AuraEngine"
 architecture "x64"
 targetdir "build"
