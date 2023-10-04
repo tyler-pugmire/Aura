@@ -1,15 +1,16 @@
 #pragma once
+namespace Aura {
+	extern Application* CreateApplication(int argc, char** argv);
+}
+bool g_ApplicationRunning = true;
 
-#include "Aura/Core/Application.h"
-#include "Aura/Core/Base.h"
-
-extern Aura::Application *Aura::CreateApplication(int argc, char **argv);
-
-int main(int argc, char **argv) {
-  Aura::Core::Initialize();
-  Aura::Application *app = Aura::CreateApplication(argc, argv);
-
-  app->Run();
-  delete app;
-  Aura::Core::Shutdown();
+int main(int argc, char** argv)
+{
+	while (g_ApplicationRunning)
+	{
+		Aura::Application* app = Aura::CreateApplication(argc, argv);
+		app->Run();
+		delete app;
+	}
+	return 0;
 }

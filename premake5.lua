@@ -23,6 +23,7 @@ location "sandbox"
 kind "ConsoleApp"
 language "C++"
 cppdialect "C++20"
+staticruntime "off"
 
 targetdir("bin/" .. outputdir .. "/%{prj.name}")
 objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -52,6 +53,7 @@ project "Aura"
 location "Aura"
 kind "StaticLib"
 cppdialect "C++20"
+staticruntime "off"
 
 targetdir("bin/" .. outputdir .. "/%{prj.name}")
 objdir("bin-int/" .. outputdir .. "/%{prj.name}")
