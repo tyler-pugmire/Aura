@@ -13,6 +13,7 @@ public:
     void OnInit()
     {
         std::cout << "OnInit" << std::endl;
+        std::cout << "OnInit" << std::endl;
     }
     void OnShutdown()
     {

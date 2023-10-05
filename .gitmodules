@@ -1,0 +1,3 @@
+[submodule "Aura/vendor/glfw"]
+	path = Aura/vendor/glfw
+	url = https://github.com/tyler-pugmire/glfw.git

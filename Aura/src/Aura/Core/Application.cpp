@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Aura/test/window.h"
 
 namespace Aura
 {
@@ -15,6 +16,7 @@ namespace Aura
     void Application::Run()
     {
         OnInit();
+        TEST::CreateWindow();
         while (m_running)
         {
         }

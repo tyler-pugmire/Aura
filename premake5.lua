@@ -1,5 +1,7 @@
 require "export-compile-commands"
 
+include "dependencies.lua"
+
 workspace "AuraEngine"
 architecture "x64"
 targetdir "build"
@@ -17,11 +19,11 @@ flags
     "MultiProcessorCompile"
 }
 
-local outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group ""
 project "sandbox"
-location "sandbox"
+-- location "sandbox"
 kind "ConsoleApp"
 language "C++"
 cppdialect "C++20"
@@ -52,7 +54,7 @@ includedirs
 
 group "Engine"
 project "Aura"
-location "Aura"
+-- location "Aura"
 kind "StaticLib"
 cppdialect "C++20"
 staticruntime "off"
@@ -68,5 +70,15 @@ files
 
 includedirs
 {
-    "%{prj.name}/src"
+    "%{prj.name}/src",
+    "%{IncludeDirs.GLFW}",
 }
+
+links
+{
+    "~/project/Aura/bin/" .. outputdir .. "/GLFW/libGLFW.a",
+}
+
+group "vendor"
+include "Aura/vendor/glfw"
+group ""
