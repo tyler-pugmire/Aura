@@ -1,7 +1,10 @@
 #pragma once
 
+#include <memory>
+
 namespace Aura
 {
+    class Window;
     class Application
     {
     public:
@@ -23,7 +26,7 @@ namespace Aura
 
     private:
         bool m_running = true;
-
+        std::unique_ptr<Window> m_pWindow;
         static Application *Instance;
     };
 } // namespace Aura

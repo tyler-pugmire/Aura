@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "Aura/test/window.h"
+#include "Aura/Core/Window.h"
 
 namespace Aura
 {
@@ -7,18 +7,23 @@ namespace Aura
     Application::Application()
     {
         Instance = this;
+
+        m_pWindow = std::make_unique<Window>();
+        WindowSpecification spec;
+        m_pWindow->Init(spec);
     }
 
     Application::~Application()
     {
+        m_pWindow.reset();
     }
 
     void Application::Run()
     {
         OnInit();
-        TEST::CreateWindow();
         while (m_running)
         {
+            m_pWindow->ProcessEvents();
         }
         OnShutdown();
     }
