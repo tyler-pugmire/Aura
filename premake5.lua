@@ -24,14 +24,8 @@ do
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
     group "vendor"
-    cmakeproject("glfw", "C")
-    -- include "Aura/vendor/glfw"
-    -- externalproject "GLFW"
-    -- location "bin-int/glfw/"
-    -- uuid "57940020-8E99-AEB6-271F-61E0F7F6B73B"
-    -- kind "StaticLib"
-    -- language "C"
-    -- targetdir("bin/" .. outputdir .. "/%{prj.name}")
+    --cmakeproject("glfw", "C")
+    include "Aura/vendor/glfw"
     group ""
 
     group "Engine"
@@ -64,14 +58,9 @@ do
 
         links
         {
-            "glfw3",
+            "glfw",
         }
 
-        prebuildcommands
-        {
-            "mkdir -p ../bin/libs/%{cfg.buildcfg}/",
-            "cp ../bin-int/glfw/src/libglfw3.a ../bin/libs/%{cfg.buildcfg}",
-        }
     end
 
     group ""
@@ -94,7 +83,7 @@ do
         links
         {
             "Aura",
-            "glfw3",
+            "glfw",
         }
 
         files

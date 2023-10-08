@@ -24,16 +24,14 @@ local outlibs = {}
 outlibs["glfw"] = "libglfw3.a"
 
 function cmakeproject(name, lang)
-    externalproject "GLFW"
-    location("./bin-int/" .. name .. "/")
+    externalproject (name)
     uuid(uuid(name))
     kind "StaticLib"
     language(lang)
 
-    -- filter "system:linux"
-    postbuildcommands {
-        "cp ./bin-int/%{name}/src/lib%{name}.a ./bin/libs/%{cfg.buildcfg}/%{outlibs[name]}",
-    }
+    filter "system:linux"
+        location("./bin-int/" .. name .. "/")
+    filter "system:windows"
+        location("./bin-int/" .. name .. "/src")
 
-    postbuildmessage "Copying lib..."
 end
