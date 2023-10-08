@@ -2,6 +2,7 @@
 Makefile
 .cache/
 compile_commands.json
+.modulecache/
 
 #Binaries
 **/bin/

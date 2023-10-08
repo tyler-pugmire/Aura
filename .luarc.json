@@ -1,7 +1,4 @@
 {
-    diagnostics: {
-        globals: {
-            "workspace"
-        }
-    }
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json" 
+    "diagnostics.globals": ["project", "workspace", "include", "printf", "buildactions", "buildcommands", "buildmessage", "postbuildcommands", "language", "kind", "links", "includedirs", "files", "linkdirs"]
 }

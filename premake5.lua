@@ -1,84 +1,114 @@
-require "export-compile-commands"
+require "scripts.premake.export-compile-commands"
 
-include "dependencies.lua"
+include "scripts/premake/dependencies.lua"
+include "scripts/premake/cmake-project.lua"
 
 workspace "AuraEngine"
-architecture "x64"
-targetdir "build"
-startproject "sandbox"
+do
+    architecture "x64"
+    targetdir "build"
+    startproject "sandbox"
 
 
-configurations
-{
-    "Debug",
-    "Release"
-}
+    configurations
+    {
+        "Debug",
+        "Release"
+    }
 
-flags
-{
-    "MultiProcessorCompile"
-}
+    flags
+    {
+        "MultiProcessorCompile"
+    }
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-group "vendor"
-include "Aura/vendor/glfw"
-group ""
+    group "vendor"
+    cmakeproject("glfw", "C")
+    -- include "Aura/vendor/glfw"
+    -- externalproject "GLFW"
+    -- location "bin-int/glfw/"
+    -- uuid "57940020-8E99-AEB6-271F-61E0F7F6B73B"
+    -- kind "StaticLib"
+    -- language "C"
+    -- targetdir("bin/" .. outputdir .. "/%{prj.name}")
+    group ""
 
-group "Engine"
-project "Aura"
-location "Aura"
-kind "StaticLib"
-cppdialect "C++20"
-staticruntime "off"
+    group "Engine"
+    project "Aura"
+    do
+        location "Aura"
+        kind "StaticLib"
+        cppdialect "C++20"
+        staticruntime "off"
 
-targetdir("bin/" .. outputdir .. "/%{prj.name}")
-objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+        targetdir("bin/" .. outputdir .. "/%{prj.name}")
+        objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 
-files
-{
-    "%{prj.name}/src/**.h",
-    "%{prj.name}/src/**.cpp"
-}
+        files
+        {
+            "%{prj.name}/src/**.h",
+            "%{prj.name}/src/**.cpp"
+        }
 
-includedirs
-{
-    "%{prj.name}/src",
-    "%{IncludeDirs.GLFW}",
-}
+        includedirs
+        {
+            "%{prj.name}/src",
+            "%{IncludeDirs.GLFW}",
+        }
 
-links
-{
-    "~/project/Aura/bin/" .. outputdir .. "/GLFW/libGLFW.a",
-}
+        libdirs
+        {
+            "bin/libs/%{cfg.buildcfg}"
+        }
 
-group ""
-project "sandbox"
-location "sandbox"
-kind "ConsoleApp"
-language "C++"
-cppdialect "C++20"
-staticruntime "off"
+        links
+        {
+            "glfw3",
+        }
 
-targetdir("bin/" .. outputdir .. "/%{prj.name}")
-objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+        prebuildcommands
+        {
+            "mkdir -p ../bin/libs/%{cfg.buildcfg}/",
+            "cp ../bin-int/glfw/src/libglfw3.a ../bin/libs/%{cfg.buildcfg}",
+        }
+    end
 
-links
-{
-    "Aura",
-    "GLFW"
-}
+    group ""
+    project "sandbox"
+    do
+        location "sandbox"
+        kind "ConsoleApp"
+        language "C++"
+        cppdialect "C++20"
+        staticruntime "off"
 
-files
-{
-    "%{prj.name}/src/**.h",
-    "%{prj.name}/src/**.c",
-    "%{prj.name}/src/**.hpp",
-    "%{prj.name}/src/**.cpp"
-}
+        targetdir("bin/" .. outputdir .. "/%{prj.name}")
+        objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 
-includedirs
-{
-    "%{prj.name}/src",
-    "Aura/src",
-}
+        libdirs
+        {
+            "bin/libs/%{cfg.buildcfg}"
+        }
+
+        links
+        {
+            "Aura",
+            "glfw3",
+        }
+
+        files
+        {
+            "%{prj.name}/src/**.h",
+            "%{prj.name}/src/**.c",
+            "%{prj.name}/src/**.hpp",
+            "%{prj.name}/src/**.cpp"
+        }
+
+        includedirs
+        {
+            "%{prj.name}/src",
+            "Aura/src",
+        }
+    end
+end
