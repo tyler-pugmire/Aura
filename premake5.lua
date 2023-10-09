@@ -26,6 +26,7 @@ do
     group "vendor"
     --cmakeproject("glfw", "C")
     include "Aura/vendor/glfw"
+    include "3rdparty/vulkan/vulkan.lua"
     group ""
 
     group "Engine"
@@ -49,6 +50,7 @@ do
         {
             "%{prj.name}/src",
             "%{IncludeDirs.GLFW}",
+            "3rdparty/vulkan/Vulkan-Headers/include"
         }
 
         libdirs
@@ -60,7 +62,6 @@ do
         {
             "glfw",
         }
-
     end
 
     group ""

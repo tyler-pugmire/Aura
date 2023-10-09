@@ -1,3 +1,9 @@
 [submodule "Aura/vendor/glfw"]
 	path = Aura/vendor/glfw
 	url = https://github.com/tyler-pugmire/glfw.git
+[submodule "3rdparty/vulkan/Vulkan-Headers"]
+	path = 3rdparty/vulkan/Vulkan-Headers
+	url = https://github.com/KhronosGroup/Vulkan-Headers.git
+[submodule "3rdparty/vulkan/Vulkan-Loader"]
+	path = 3rdparty/vulkan/Vulkan-Loader
+	url = https://github.com/KhronosGroup/Vulkan-Loader.git
