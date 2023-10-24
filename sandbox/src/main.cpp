@@ -1,6 +1,8 @@
 #include "Aura.h"
 #include "Aura/EntryPoint.h"
 
+#include "Aura/Core/String/CRC32.h"
+
 #include <iostream>
 
 class SandboxApp : public Aura::Application
@@ -12,8 +14,6 @@ public:
 
     void OnInit()
     {
-        std::cout << "OnInit" << std::endl;
-        std::cout << "OnInit" << std::endl;
     }
     void OnShutdown()
     {

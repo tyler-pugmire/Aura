@@ -1,6 +1,5 @@
 #include "Window.h"
 #include "GLFW/glfw3.h"
-#include "vulkan/vulkan.h"
 #include <iostream>
 
 namespace
@@ -32,12 +31,6 @@ namespace Aura
 
         s_pGLFWWindow = glfwCreateWindow((int)spec.m_width, (int)spec.m_height, spec.m_title.c_str(), nullptr, nullptr);
         glfwSetWindowCloseCallback(s_pGLFWWindow, [](GLFWwindow *window) {});
-
-        int32_t extensionCount = 0;
-
-        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-
-        std::cout << extensionCount << " extensions supported\n";
     }
 
     void Window::ProcessEvents()

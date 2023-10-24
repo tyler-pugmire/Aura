@@ -33,7 +33,7 @@ do
     do
         location "Aura"
         kind "StaticLib"
-        cppdialect "C++20"
+        cppdialect "C++latest"
         staticruntime "off"
 
         targetdir("bin/" .. outputdir .. "/%{prj.name}")
@@ -68,7 +68,7 @@ do
         location "sandbox"
         kind "ConsoleApp"
         language "C++"
-        cppdialect "C++20"
+        cppdialect "C++latest"
         staticruntime "off"
 
         targetdir("bin/" .. outputdir .. "/%{prj.name}")
