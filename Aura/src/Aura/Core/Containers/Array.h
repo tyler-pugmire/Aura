@@ -2,6 +2,8 @@
 
 #include "Aura.h"
 
+#include <array>
+
 namespace Aura
 {
     namespace Core
