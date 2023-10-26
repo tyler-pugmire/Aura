@@ -2,7 +2,9 @@
 
 #include "Aura/Core/Containers/Array.h"
 
+#include <compare>
 #include <string>
+
 namespace Aura
 {
     namespace Core
@@ -21,6 +23,8 @@ namespace Aura
             {
                 return m_checksum;
             }
+
+            auto operator<=>(Checksum const &right) const = default;
 
         protected:
             static constexpr u32 s_polynomial = 0xEDB88320;
@@ -54,10 +58,17 @@ namespace Aura
             {
             }
 
-            constexpr bool operator==(CRC32 const &right) const
-            {
-                return AsU32() == right.AsU32();
-            }
+            auto operator<=>(CRC32 const &right) const = default;
+
+            // constexpr bool operator==(CRC32 const &right) const
+            // {
+            //     return AsU32() == right.AsU32();
+            // }
+            //
+            // constexpr bool operator!=(CRC32 const &right) const
+            // {
+            //     return !operator==(right);
+            // }
 
             static constexpr u32 Hash(char const *str, size_t len)
             {
@@ -94,10 +105,15 @@ namespace Aura
                 return ~crc;
             }
 
-            constexpr bool operator==(CRC32i const &right) const
-            {
-                return AsU32() == right.AsU32();
-            }
+            auto operator<=>(CRC32i const &right) const = default;
+            // constexpr bool operator==(CRC32i const &right) const
+            // {
+            //     return AsU32() == right.AsU32();
+            // }
+            // constexpr bool operator!=(CRC32i const &right) const
+            // {
+            //     return !operator==(right);
+            // }
         };
 
 #define CRC_STATIC(str)                                                                                                \
