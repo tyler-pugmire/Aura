@@ -1,4 +1,6 @@
 #include "Window.h"
+#include "Aura/Core/Application.h"
+#include "Aura/Core/Event/EventManager.h"
 #include "GLFW/glfw3.h"
 #include <iostream>
 
@@ -31,6 +33,10 @@ namespace Aura
 
         s_pGLFWWindow = glfwCreateWindow((int)spec.m_width, (int)spec.m_height, spec.m_title.c_str(), nullptr, nullptr);
         glfwSetWindowCloseCallback(s_pGLFWWindow, [](GLFWwindow *window) {});
+
+        glfwSetWindowCloseCallback(s_pGLFWWindow, [](GLFWwindow *window) {
+            Application::Get().GetEventSystem().BroadcastEvent(WindowEvent::Closed);
+        });
     }
 
     void Window::ProcessEvents()

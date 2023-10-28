@@ -7,8 +7,10 @@ namespace Aura
     class Window;
     namespace Core
     {
+        class Event;
         class EventSystem;
-    }
+        class EventListener;
+    } // namespace Core
 
     class Application
     {
@@ -39,5 +41,8 @@ namespace Aura
         std::unique_ptr<Window> m_pWindow;
         static Application *Instance;
         std::unique_ptr<Core::EventSystem> m_pEventManager;
+        std::unique_ptr<Core::EventListener> m_pEventListener;
+
+        void HandleWindowClosed(Core::Event const &event);
     };
 } // namespace Aura

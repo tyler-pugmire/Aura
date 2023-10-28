@@ -14,6 +14,9 @@ namespace Aura
         m_pWindow->Init(spec);
 
         m_pEventManager = std::make_unique<Core::EventSystem>();
+        m_pEventListener = std::move(m_pEventManager->CreateListener());
+
+        m_pEventListener->Subscribe(WindowEvent::Closed, this, &Application::HandleWindowClosed);
     }
 
     Application::~Application()
@@ -38,4 +41,8 @@ namespace Aura
         m_running = false;
     }
 
+    void Application::HandleWindowClosed(Core::Event const &event)
+    {
+        m_running = false;
+    }
 } // namespace Aura

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Aura/Core/String/CRC32.h"
+#include "CommonEvents.h"
 #include "Event.h"
 #include <functional>
 #include <map>
