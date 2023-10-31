@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "Aura/Core/Event/EventManager.h"
 #include "Aura/Core/Window.h"
-
+#include "Aura/Platform/Vulkan/VulkanTest.h"
 namespace Aura
 {
     Application *Application::Instance = nullptr;
@@ -17,6 +17,8 @@ namespace Aura
         m_pEventListener = std::move(m_pEventManager->CreateListener());
 
         m_pEventListener->Subscribe(WindowEvent::Closed, this, &Application::HandleWindowClosed);
+
+        Graphics::VulkanTest::Init();
     }
 
     Application::~Application()

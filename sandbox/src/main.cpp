@@ -23,6 +23,11 @@ public:
 
     void OnInit()
     {
+#ifdef LINUX
+        std::cout << "Linux\n";
+#elif WIN32
+        std::cout << "Windows\n";
+#endif
     }
     void OnShutdown()
     {

@@ -13,6 +13,7 @@ do
     configurations
     {
         "Debug",
+        "Profile",
         "Release"
     }
 
@@ -22,6 +23,36 @@ do
     }
 
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+    filter "configurations:Debug"
+    do
+        defines { "DEBUG" }
+        symbols "On"
+    end
+
+    filter "configurations:Profile"
+    do
+        defines { "DEBUG" }
+        symbols "On"
+        optimize "On"
+    end
+
+    filter "configurations:Release"
+    do
+        defines { "NDEBUG" }
+        optimize "On"
+    end
+
+    filter "system:Linux"
+    do
+        defines "LINUX"
+    end
+
+    filter "system:Windows"
+    do
+        defines "WIN32"
+    end
+
 
     group "vendor"
     --cmakeproject("glfw", "C")
@@ -59,6 +90,7 @@ do
         links
         {
             "glfw",
+            "vulkan"
         }
     end
 
@@ -83,6 +115,7 @@ do
         {
             "Aura",
             "glfw",
+            "vulkan"
         }
 
         files
