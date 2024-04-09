@@ -1,0 +1,25 @@
+[04-08-2024 08:48:07:828] [info] [Logger] Logger initialized
+[04-08-2024 08:48:07:959] [debug] [Graphics] 15 extensions supported
+[04-08-2024 08:48:07:974] [trace] [Graphics] Supported instance layers
+[04-08-2024 08:48:07:974] [trace] [Graphics] {
+[04-08-2024 08:48:17:654] [trace] [Graphics] 	VK_LAYER_NV_optimus
+[04-08-2024 08:48:18:359] [trace] [Graphics] 	VK_LAYER_NV_nomad_release_public_2021_4_1
+[04-08-2024 08:48:18:895] [trace] [Graphics] 	VK_LAYER_NV_GPU_Trace_release_public_2021_4_1
+[04-08-2024 08:48:19:482] [trace] [Graphics] 	VK_LAYER_EOS_Overlay
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_OBS_HOOK
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_VALVE_steam_overlay
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_VALVE_steam_fossilize
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_EOS_Overlay
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_EOS_Overlay
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_ROCKSTAR_GAMES_social_club
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_LUNARG_api_dump
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_LUNARG_gfxreconstruct
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_KHRONOS_synchronization2
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_KHRONOS_validation
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_LUNARG_monitor
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_LUNARG_screenshot
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_KHRONOS_profiles
+[04-08-2024 08:48:21:859] [trace] [Graphics] 	VK_LAYER_KHRONOS_shader_object
+[04-08-2024 08:48:21:859] [trace] [Graphics] }
+[04-08-2024 08:48:21:943] [info] [Sandbox] Windows
+[04-08-2024 08:48:27:477] [info] [Logger] Logger Shutdown

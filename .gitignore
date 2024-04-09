@@ -7,6 +7,8 @@ compile_commands.json
 #Binaries
 **/bin/
 bin-int/
+conan_dependencies/
+scripts/__pycache__/
 
 # Visual Studio files
 .vs/

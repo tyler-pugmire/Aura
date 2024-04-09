@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Aura/Core/Containers/Array.h"
+#include "Aura.h"
+#include "EASTL/array.h"
 
+#include <compare>
 #include <string>
 namespace Aura
 {
@@ -14,7 +16,6 @@ namespace Aura
             constexpr Checksum64(u64 checksum) : m_checksum(checksum)
             {
             }
-            Checksum64 operator=(u64 checksum);
 
             static constexpr u64 CRC_INIT = 0xFFFFFFFFFFFFFFFFULL;
             constexpr inline u64 AsU64() const
@@ -22,10 +23,12 @@ namespace Aura
                 return m_checksum;
             }
 
+            auto operator<=>(Checksum64 const &right) const = default;
+
         protected:
             static constexpr u64 s_polynomial = 0xD800000000000000ULL;
-            static constexpr std::array<u64, 256> s_lookup = []() {
-                std::array<u64, 256> table = {};
+            static constexpr eastl::array<u64, 256> s_lookup = []() {
+                eastl::array<u64, 256> table = {};
 
                 for (std::uint32_t i = 0; i < 256; ++i)
                 {
@@ -63,10 +66,8 @@ namespace Aura
                 }
                 return ~crc;
             }
-            constexpr bool operator==(CRC64 const &right) const
-            {
-                return AsU64() == right.AsU64();
-            }
+
+            auto operator<=>(CRC64 const &right) const = default;
         };
 
         class CRC64i : public Checksum64
@@ -93,10 +94,7 @@ namespace Aura
                 return ~crc;
             }
 
-            constexpr bool operator==(CRC64i const &right) const
-            {
-                return AsU64() == right.AsU64();
-            }
+            auto operator<=>(CRC64i const &right) const = default;
         };
 
         using PathHash = CRC64i;

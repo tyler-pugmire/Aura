@@ -3,6 +3,7 @@
 
 #include "Aura/Core/Event/EventManager.h"
 #include "Aura/Core/String/CRC32.h"
+#include "Aura/Core/Log.h"
 
 #include <iostream>
 
@@ -24,9 +25,9 @@ public:
     void OnInit()
     {
 #ifdef LINUX
-        std::cout << "Linux\n";
+        AURA_LOG("Sandbox", "Linux");
 #elif WIN32
-        std::cout << "Windows\n";
+        AURA_LOG("Sandbox", "Windows");
 #endif
     }
     void OnShutdown()

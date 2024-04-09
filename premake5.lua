@@ -2,6 +2,7 @@ require "scripts.premake.export-compile-commands"
 
 include "scripts/premake/dependencies.lua"
 include "scripts/premake/cmake-project.lua"
+include "conan_dependencies/conandeps.premake5.lua"
 
 workspace "AuraEngine"
 do
@@ -90,8 +91,53 @@ do
         links
         {
             "glfw",
-            "vulkan"
         }
+
+        filter "configurations:Debug"
+        do
+            conan_setup("debug_x86_64", "eastl")
+            conan_setup("debug_x86_64", "eabase")
+            conan_setup("debug_x86_64", "spdlog")
+            conan_setup("debug_x86_64", "fmt")
+        end
+
+        filter "configurations:Profile"
+        do
+            conan_setup("debug_x86_64", "eastl")
+            conan_setup("debug_x86_64", "eabase")
+            conan_setup("debug_x86_64", "spdlog")
+            conan_setup("debug_x86_64", "fmt")
+        end
+
+        filter "configurations:Release"
+        do
+            conan_setup("release_x86_64", "eastl")
+            conan_setup("release_x86_64", "eabase")
+            conan_setup("release_x86_64", "spdlog")
+            conan_setup("release_x86_64", "fmt")
+        end
+
+        filter "system:Windows"
+        do
+            includedirs
+            {
+                "%{IncludeDirs.Vulkan}",
+            }
+
+            links
+            {
+                "%{Library.Vulkan}",
+                --"%{Library.VulkanUtils}",
+            }
+        end
+
+        filter "system:unix"
+        do
+            links
+            {
+                "vulkan"
+            }
+        end
     end
 
     group ""
@@ -115,7 +161,6 @@ do
         {
             "Aura",
             "glfw",
-            "vulkan"
         }
 
         files
@@ -131,5 +176,37 @@ do
             "%{prj.name}/src",
             "Aura/src",
         }
+
+        filter "configurations:Debug"
+        do
+            conan_setup("debug_x86_64", "eastl")
+            conan_setup("debug_x86_64", "eabase")
+            conan_setup("debug_x86_64", "spdlog")
+            conan_setup("debug_x86_64", "fmt")
+        end
+
+        filter "configurations:Profile"
+        do
+            conan_setup("debug_x86_64", "eastl")
+            conan_setup("debug_x86_64", "eabase")
+            conan_setup("debug_x86_64", "spdlog")
+            conan_setup("debug_x86_64", "fmt")
+        end
+
+        filter "configurations:Release"
+        do
+            conan_setup("release_x86_64", "eastl")
+            conan_setup("release_x86_64", "eabase")
+            conan_setup("release_x86_64", "spdlog")
+            conan_setup("release_x86_64", "fmt")
+        end
+
+        filter "system:unix"
+        do
+            links
+            {
+                "vulkan"
+            }
+        end
     end
 end

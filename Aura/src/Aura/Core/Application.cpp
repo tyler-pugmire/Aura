@@ -2,6 +2,8 @@
 #include "Aura/Core/Event/EventManager.h"
 #include "Aura/Core/Window.h"
 #include "Aura/Platform/Vulkan/VulkanTest.h"
+#include "Aura/Core/Log.h"
+
 namespace Aura
 {
     Application *Application::Instance = nullptr;
@@ -9,6 +11,7 @@ namespace Aura
     {
         Instance = this;
 
+        Log::Init();
         m_pWindow = std::make_unique<Window>();
         WindowSpecification spec;
         m_pWindow->Init(spec);
@@ -24,6 +27,7 @@ namespace Aura
     Application::~Application()
     {
         m_pWindow.reset();
+        Log::Shutdown();
     }
 
     void Application::Run()
@@ -32,7 +36,7 @@ namespace Aura
         while (m_running)
         {
             m_pWindow->ProcessEvents();
-
+            
             m_pEventManager->Dispatch();
         }
         OnShutdown();

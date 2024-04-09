@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Aura/Core/Containers/Array.h"
+#include "Aura.h"
+#include "EASTL/array.h"
 
 #include <compare>
 #include <string>
@@ -16,7 +17,6 @@ namespace Aura
             constexpr Checksum(u32 checksum) : m_checksum(checksum)
             {
             }
-            Checksum operator=(u32 checksum);
 
             static constexpr u32 CRC_INIT = 0xFFFFFFFF;
             constexpr inline u32 AsU32() const
@@ -28,10 +28,10 @@ namespace Aura
 
         protected:
             static constexpr u32 s_polynomial = 0xEDB88320;
-            static constexpr BasicArray<u32, 256> s_lookup = []() {
-                BasicArray<u32, 256> table = {};
+            static constexpr eastl::array<u32, 256> s_lookup = []() {
+                eastl::array<u32, 256> table = {};
 
-                for (u32 i = 0; i < 256; ++i)
+                for (s32 i = 0; i < table.size(); ++i)
                 {
                     u32 crc = i;
                     for (u32 j = 0; j < 8; ++j)
@@ -59,16 +59,6 @@ namespace Aura
             }
 
             auto operator<=>(CRC32 const &right) const = default;
-
-            // constexpr bool operator==(CRC32 const &right) const
-            // {
-            //     return AsU32() == right.AsU32();
-            // }
-            //
-            // constexpr bool operator!=(CRC32 const &right) const
-            // {
-            //     return !operator==(right);
-            // }
 
             static constexpr u32 Hash(char const *str, size_t len)
             {
@@ -106,14 +96,6 @@ namespace Aura
             }
 
             auto operator<=>(CRC32i const &right) const = default;
-            // constexpr bool operator==(CRC32i const &right) const
-            // {
-            //     return AsU32() == right.AsU32();
-            // }
-            // constexpr bool operator!=(CRC32i const &right) const
-            // {
-            //     return !operator==(right);
-            // }
         };
 
 #define CRC_STATIC(str)                                                                                                \
